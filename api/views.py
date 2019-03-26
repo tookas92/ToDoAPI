@@ -1,6 +1,3 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-import django_filters.rest_framework
 
 from rest_framework import filters
 from rest_framework.generics import (CreateAPIView, ListAPIView,
