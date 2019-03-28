@@ -32,11 +32,8 @@ class ViewTestCase(TestCase):
         user = User.objects.get(username="test")
         self.client.login(username="test", password="test123")
         self.taskdata = {"name": "Test task","user": user.id, "status": "n",
-<<<<<<< HEAD
-                         "deadline": (timezone.now() + timezone.timedelta(days=2)).strftime('%Y-%m-%d'), "description": "Test"}
-=======
-                         "deadline": timezone.now() + timezone.timedelta(days=2), "description": "Test"}
->>>>>>> dfff21bd5d745752b0e9aef8b25ae485e6c6a2a8
+                         "deadline": (timezone.now() + timezone.timedelta(days=2)).strftime('%Y-%m-%d'),
+                         "description": "Test"}
         self.response = self.client.post(
             reverse('create'),
             self.taskdata,
@@ -44,7 +41,7 @@ class ViewTestCase(TestCase):
 
 
     def test_api_can_create_task(self):
-<<<<<<< HEAD
+
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
 
     def test_api_can_get_task(self):
@@ -81,6 +78,5 @@ class ViewTestCase(TestCase):
             format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-=======
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
->>>>>>> dfff21bd5d745752b0e9aef8b25ae485e6c6a2a8
+
