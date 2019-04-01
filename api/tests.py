@@ -1,20 +1,19 @@
-from django.test import TestCase
-from django.utils import timezone
 from django.contrib.auth.models import User
+from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
+
+
 from rest_framework.test import APIClient
 from rest_framework import status
+
+
 from .models import Tasks
-import json
-import datetime
-# Create your tests here.
 
 
 class ModelTestCase(TestCase):
 
-    def create_task(self, name="only a test", user=User.objects.get(id=1), status='n',
-                    deadline=timezone.now() + timezone.timedelta(days=7),
-                    description="test case"):
+    def create_task(self, user=User.objects.get(id=1)):
         return Tasks.objects.create(name="only a test", user=user, status='n',
                     deadline=timezone.now() + timezone.timedelta(days=7),
                     description="test case")
@@ -39,7 +38,6 @@ class ViewTestCase(TestCase):
             self.taskdata,
             format="json")
 
-
     def test_api_can_create_task(self):
 
         self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
@@ -52,7 +50,7 @@ class ViewTestCase(TestCase):
             format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        #self.assertContains(response, task)
+        # self.assertContains(response, task)
 
     def test_api_can_update_task(self):
         task = Tasks.objects.get()
